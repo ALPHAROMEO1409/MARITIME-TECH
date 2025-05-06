@@ -32,9 +32,17 @@ if 'weather_def' not in st.session_state:
     st.session_state.weather_def = {}
 
 # Page 1: Vessel and Voyage Details
+# Page 1: Vessel and Voyage Details (Corrected Version)
 def vessel_details_page():
     st.header("🚢 Vessel & Voyage Configuration")
     
+    # Initialize voyage_data with default values
+    if 'voyage_data' not in st.session_state:
+        st.session_state.voyage_data = {
+            'cosp': datetime(2024, 3, 1, 8, 0),
+            'eosp': datetime(2024, 3, 10, 18, 0)
+        }
+
     with st.container():
         cols = st.columns([1,1,1])
         with cols[0]:
@@ -49,10 +57,21 @@ def vessel_details_page():
             st.session_state.voyage_data['voyage_no'] = st.text_input("Voyage Number", value="V2024-01")
             st.session_state.voyage_data['load_port'] = st.text_input("Loading Port", value="Rotterdam")
             st.session_state.voyage_data['discharge_port'] = st.text_input("Discharge Port", value="Singapore")
-            st.session_state.voyage_data['cosp'] = st.datetime_input("COSP Date/Time", 
-                value=datetime(2024, 3, 1, 8, 0))
-            st.session_state.voyage_data['eosp'] = st.datetime_input("EOSP Date/Time", 
-                value=datetime(2024, 3, 10, 18, 0))
+            
+            # Corrected datetime inputs with proper state management
+            cosp = st.datetime_input(
+                "COSP Date/Time",
+                value=st.session_state.voyage_data['cosp'],
+                key="cosp_input"
+            )
+            st.session_state.voyage_data['cosp'] = cosp
+
+            eosp = st.datetime_input(
+                "EOSP Date/Time",
+                value=st.session_state.voyage_data['eosp'],
+                key="eosp_input"
+            )
+            st.session_state.voyage_data['eosp'] = eosp
         
         with cols[2]:
             st.subheader("CP Parameters")
@@ -64,6 +83,7 @@ def vessel_details_page():
                 value=5.0, min_value=0.0, max_value=100.0)
             st.session_state.cp_params['speed_tolerance'] = st.number_input("Speed Tolerance (knots)", 
                 value=0.5, min_value=0.0, step=0.1)
+
 
     st.divider()
     
