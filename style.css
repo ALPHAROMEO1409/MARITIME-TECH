@@ -1,0 +1,34 @@
+/* style.css */
+.stApp {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #ffffff;
+}
+
+.stTextInput>div>div>input, .stNumberInput>div>div>input {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.stSelectbox>div>div>select {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.stDateInput>div>div>input {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.stButton>button {
+    background: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+}
+
+.stMetric {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
